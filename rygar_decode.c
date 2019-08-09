@@ -28,17 +28,16 @@ void draw_tile(int width, int height, int x, int y, int tile_index, uint8_t* dat
     uint8_t* ptr = buf + (py*width*8 + px) * BYTES_PER_PIXEL;
 
     for (int xx = 0; xx < TILE_WIDTH/2; xx++) {
-      // Low byte is the first pixel.
       uint8_t lo = data[tile_addr + xx] & 0xf;
-
-      // High byte is the second pixel.
       uint8_t hi = (data[tile_addr + xx] >> 4) & 0xf;
 
+      // High nibble is the first pixel.
       uint8_t c = hi << 5;
       *ptr++ = c;
       *ptr++ = c;
       *ptr++ = c;
 
+      // Low nibble is the second pixel.
       uint8_t d = lo << 5;
       *ptr++ = d;
       *ptr++ = d;
