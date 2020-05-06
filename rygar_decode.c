@@ -17,7 +17,7 @@ uint8_t buf_x4[1024 * 1024 * BYTES_PER_PIXEL];
 /* 	{ 0, 4, 8, 12, 16, 20, 24, 28 }, // bit offset of each horizontal pixel */
 /* 	{ 0, 32, 64, 96, 128, 160, 192, 256 }, // bit offset of each vertical pixel */
 /* 	4*8*8 // distance between two consecutive elements (in bits) */
-void draw_tile(int width, int height, int x, int y, int tile_index, uint8_t* data) {
+void draw_tile(int width, int height, int x, int y, int tile_index, uint8_t *data) {
   for (int yy = 0; yy < TILE_HEIGHT; yy++) {
     // Each tile is 32 bytes apart
     // Each row is 4 bytes apart
@@ -25,7 +25,7 @@ void draw_tile(int width, int height, int x, int y, int tile_index, uint8_t* dat
 
     int py = y*TILE_HEIGHT + yy;
     int px = x*TILE_WIDTH;
-    uint8_t* ptr = buf + (py*width*8 + px) * BYTES_PER_PIXEL;
+    uint8_t *ptr = buf + (py*width*8 + px) * BYTES_PER_PIXEL;
 
     for (int xx = 0; xx < TILE_WIDTH/2; xx++) {
       uint8_t lo = data[tile_addr + xx] & 0xf;
@@ -46,7 +46,7 @@ void draw_tile(int width, int height, int x, int y, int tile_index, uint8_t* dat
   }
 }
 
-void decode_tiles(int width, int height, uint8_t* data) {
+void decode_tiles(int width, int height, uint8_t *data) {
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       int tile_index = y*width + x;
@@ -61,7 +61,7 @@ void resize() {
       uint32_t x0 = x>>2;
       uint32_t y0 = y>>2;
       uint8_t* src = buf + (y0*256 + x0) * BYTES_PER_PIXEL;
-      uint8_t* dst = buf_x4 + (y*1024 + x)  * BYTES_PER_PIXEL;
+      uint8_t* dst = buf_x4 + (y*1024 + x) * BYTES_PER_PIXEL;
       for (int i = 0; i < BYTES_PER_PIXEL; i++) {
         *dst++ = *src++;
       }
@@ -69,7 +69,7 @@ void resize() {
   }
 }
 
-void decode_rom(uint8_t* data, char* name) {
+void decode_rom(uint8_t *data, char *name) {
   decode_tiles(32, 32, data);
   resize();
   stbi_write_png(name, 1024, 1024, 3, buf_x4, 1024*3);
