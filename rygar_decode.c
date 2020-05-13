@@ -76,22 +76,22 @@ void decode_rom(uint8_t *data, char *name) {
 }
 
 int main() {
-  decode_rom(dump_cpu_8k, "cpu_8k.png");
+  decode_rom(dump_silkworm_2, "silkworm_2.png");
 
-  decode_rom(dump_vid_6k, "vid_6k.png");
-  decode_rom(dump_vid_6j, "vid_6j.png");
-  decode_rom(dump_vid_6h, "vid_6h.png");
-  decode_rom(dump_vid_6g, "vid_6g.png");
+  decode_rom(dump_silkworm_6, "silkworm_6.png");
+  decode_rom(dump_silkworm_7, "silkworm_7.png");
+  decode_rom(dump_silkworm_8, "silkworm_8.png");
+  decode_rom(dump_silkworm_9, "silkworm_9.png");
 
-  decode_rom(dump_vid_6p, "vid_6p.png");
-  decode_rom(dump_vid_6o, "vid_6o.png");
-  decode_rom(dump_vid_6n, "vid_6n.png");
-  decode_rom(dump_vid_6l, "vid_6l.png");
+  decode_rom(dump_silkworm_10, "silkworm_10.png");
+  decode_rom(dump_silkworm_11, "silkworm_11.png");
+  decode_rom(dump_silkworm_12, "silkworm_12.png");
+  decode_rom(dump_silkworm_13, "silkworm_13.png");
 
-  decode_rom(dump_vid_6f, "vid_6f.png");
-  decode_rom(dump_vid_6e, "vid_6e.png");
-  decode_rom(dump_vid_6c, "vid_6c.png");
-  decode_rom(dump_vid_6b, "vid_6b.png");
+  decode_rom(dump_silkworm_14, "silkworm_14.png");
+  decode_rom(dump_silkworm_15, "silkworm_15.png");
+  decode_rom(dump_silkworm_16, "silkworm_16.png");
+  decode_rom(dump_silkworm_17, "silkworm_17.png");
 
   return 0;
 }
