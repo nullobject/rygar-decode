@@ -37,24 +37,24 @@ typedef struct {
 
 /* decode descriptor for a 8x8 tile */
 tile_decode_desc_t tile_8x8 = {
-  .tile_width = 8,
-  .tile_height = 8,
-  .planes = 4,
-  .plane_offsets = { STEP4(0, 1) },
-  .x_offsets = { STEP8(0, 4) },
-  .y_offsets = { STEP8(0, 4 * 8) },
-  .tile_size = 4 * 8 /* 32 bytes */
+    .tile_width = 8,
+    .tile_height = 8,
+    .planes = 4,
+    .plane_offsets = {STEP4(0, 1)},
+    .x_offsets = {STEP8(0, 4)},
+    .y_offsets = {STEP8(0, 4 * 8)},
+    .tile_size = 4 * 8 /* 32 bytes */
 };
 
 /* decode descriptor for a 16x16 tile, made up of four 8x8 tiles */
 tile_decode_desc_t tile_16x16 = {
-  .tile_width = 16,
-  .tile_height = 16,
-  .planes = 4,
-  .plane_offsets = { STEP4(0, 1) },
-  .x_offsets = { STEP8(0, 4), STEP8(4 * 8 * 8, 4) },
-  .y_offsets = { STEP8(0, 4 * 8), STEP8(4 * 8 * 8 * 2, 4 * 8) },
-  .tile_size = 4 * 4 * 8 /* 128 bytes */
+    .tile_width = 16,
+    .tile_height = 16,
+    .planes = 4,
+    .plane_offsets = {STEP4(0, 1)},
+    .x_offsets = {STEP8(0, 4), STEP8(4 * 8 * 8, 4)},
+    .y_offsets = {STEP8(0, 4 * 8), STEP8(4 * 8 * 8 * 2, 4 * 8)},
+    .tile_size = 4 * 4 * 8 /* 128 bytes */
 };
 
 uint8_t tile_data[ROM_SIZE];
@@ -77,10 +77,8 @@ static inline int read_bit(const uint8_t *rom, int offset) {
  * can just iterate through the pixels sequentially, as each pixel is
  * represented by only one byte.
  */
-void decode_tile(const tile_decode_desc_t *desc,
-                 const uint8_t *rom,
-                 uint8_t *dst,
-                 size_t count) {
+void decode_tile(const tile_decode_desc_t *desc, const uint8_t *rom,
+                 uint8_t *dst, size_t count) {
   for (size_t tile = 0; tile < count; tile++) {
     uint8_t *ptr = dst + (tile * desc->tile_width * desc->tile_height);
 
@@ -90,7 +88,7 @@ void decode_tile(const tile_decode_desc_t *desc,
     for (size_t plane = 0; plane < desc->planes; plane++) {
       int plane_bit = 1 << (desc->planes - 1 - plane);
       int plane_offset =
-        (tile * desc->tile_size * 8) + desc->plane_offsets[plane];
+          (tile * desc->tile_size * 8) + desc->plane_offsets[plane];
 
       for (size_t y = 0; y < desc->tile_height; y++) {
         int y_offset = plane_offset + desc->y_offsets[y];
@@ -119,8 +117,7 @@ void write_hex(const char *filename, const void *data, size_t size) {
   fclose(fptr);
 }
 
-void decode_tiles(const tile_decode_desc_t *desc,
-                  const uint8_t *data,
+void decode_tiles(const tile_decode_desc_t *desc, const uint8_t *data,
                   const char *name) {
   char buf[255];
   size_t rows = 256 / desc->tile_height;
@@ -154,7 +151,7 @@ void decode_tiles(const tile_decode_desc_t *desc,
 
   // Write raw tile data
   snprintf(buf, sizeof(buf), "%s.hex", name);
-  write_hex(buf, &tile_data, ROM_SIZE);
+  write_hex(buf, data, ROM_SIZE);
 }
 
 int main() {
